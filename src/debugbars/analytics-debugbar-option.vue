@@ -32,7 +32,7 @@ export default {
     logs: []
   }),
   async mounted() {
-    const { analyticsLogs } = await import("@/components/miniapp-debugbar/analytics-debugbar");
+    const { analyticsLogs } = await import("../listeners/analytics-debugbar");
     this.logs = analyticsLogs;
   },
   methods: {
