@@ -11,7 +11,7 @@ npm install --save-dev miniapp-debugbar
 
 И в нужном месте подключить компонент: (обычно, это App.vue)
 ```javascript
-import MiniappDebugger from "miniapp-debugbar/miniapp-debugbar.vue";
+import MiniappDebugger from "miniapp-debugbar/src/miniapp-debugbar";
 
 <MiniappDebugger v-if="isDevelopment"/>
 ```
@@ -22,7 +22,7 @@ import MiniappDebugger from "miniapp-debugbar/miniapp-debugbar.vue";
 Если хотите получать логи из console, в вашем main.js (либо app.js)
 вызовите функцию consoleDebugbar.
 ```javascript
-import { consoleDebugbar } from "miniapp-debugbar/listeners/console-debugbar";
+import { consoleDebugbar } from "miniapp-debugbar/src/listeners/console-debugbar";
 consoleDebugbar();
 ```
 
@@ -32,7 +32,7 @@ consoleDebugbar();
 
 #### Подключение
 ```javascript
-import { amplitudeListener } from "miniapp-debugbar/listeners/analytics-debugbar";
+import { amplitudeListener } from "miniapp-debugbar/src/listeners/analytics-debugbar";
 ```
 
 #### Передача функции amplitudeListener

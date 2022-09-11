@@ -1,5 +1,5 @@
 {
-  "name": "@lootjs/miniapp-debugbar",
+  "name": "miniapp-debugbar",
   "version": "1.0.0",
   "description": "Debugbar for your awesome miniapps",
   "scripts": {
