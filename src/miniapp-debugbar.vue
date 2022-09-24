@@ -15,7 +15,11 @@
           {{ option.name }}
         </div>
       </div>
-      <component :is="getComponent" class="miniapp-debugbar__body"></component>
+      <div class="miniapp-debugbar__body" :class="
+        {'miniapp-debugbar__body--highlight': 'highlight' in getDebugbar}
+      ">
+        <component :is="getDebugbar.component"></component>
+      </div>
     </div>
   </div>
 </template>
@@ -89,13 +93,22 @@ export default {
     }
   },
   computed: {
-    getComponent() {
-      return this.filteredOptions.find(option => option.id === this.activeOption).component
+    getDebugbar() {
+      return this.filteredOptions.find(option => option.id === this.activeOption)
     },
   },
   created() {
     const optionsConsideredExclude = this.options.filter(option => !this.exclude.includes(option.id));
     this.filteredOptions = optionsConsideredExclude.concat(this.custom);
+  },
+  updated() {
+    if ('highlight' in this.getDebugbar) {
+      const medias = document.querySelectorAll('.miniapp-debugbar__body--highlight div');
+      medias.forEach(mediaEl => {
+        const size = getComputedStyle(mediaEl);
+        mediaEl.setAttribute('data-size', size.width+'/'+size.height)
+      });
+    }
   },
   methods: {
     hideDebugPage() {
@@ -153,6 +166,33 @@ export default {
 .miniapp-debugbar__body {
   margin: 10px 0;
 }
+
+.miniapp-debugbar__body--highlight div {
+  outline: 1px solid #00b3ff;
+}
+
+.miniapp-debugbar__body--highlight div:after {
+  content: attr(data-size);
+  font-size: 12px;
+  background: rgb(204 204 204 / 24%);
+  color: #000;
+}
+
+.miniapp-debugbar__body--highlight div:hover:after {
+  content: attr(class);
+}
+
+.miniapp-debugbar__body--highlight img {
+  outline: 1px solid #ff6f00;
+}
+
+.miniapp-debugbar__body--highlight video {
+  outline: 1px solid #1791a1;
+}
+.miniapp-debugbar__body--highlight button {
+  outline: 1px solid #3f43dc;
+}
+
 .miniapp-debugbar--visible {
   right: inherit;
   top: 0;

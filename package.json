@@ -1,12 +1,16 @@
 {
   "name": "miniapp-debugbar",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Debugbar for your awesome miniapps",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "hotkeys-js": "^3.10.0",
+    "vue": "^2.0 || ^3.0"
+  },
+  "peerDependencies": {
     "vue": "^2.0 || ^3.0"
   },
   "repository": {
