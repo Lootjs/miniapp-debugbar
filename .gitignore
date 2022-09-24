@@ -10,3 +10,4 @@ pnpm-debug.log*
 .idea
 .vscode
 .npmrc
+package-lock.json

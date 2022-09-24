@@ -7,7 +7,7 @@
       <div class="miniapp-debugbar__title" @click="debugPageVisible = false">Miniapp Debugbar (click to close)</div>
       <div class="miniapp-debugbar__options">
         <div class="miniapp-debugbar__option"
-             v-for="option in options"
+             v-for="option in filteredOptions"
              :key="option.id"
              :class="{'miniapp-debugbar__option--active' : activeOption === option.id }"
              @click="optionSelected(option.id)"
@@ -76,12 +76,26 @@ export default {
         component: LS,
       }
     ],
+    filteredOptions: []
   }),
+  props: {
+    exclude: {
+      type: Array,
+      default: () => [],
+    },
+    custom: {
+      type: Array,
+      default: () => [],
+    }
+  },
   computed: {
     getComponent() {
-      //очень оптимистичный код, но не уверен, что activeOption === null
-      return this.options.find(option => option.id === this.activeOption).component
+      return this.filteredOptions.find(option => option.id === this.activeOption).component
     },
+  },
+  created() {
+    const optionsConsideredExclude = this.options.filter(option => !this.exclude.includes(option.id));
+    this.filteredOptions = optionsConsideredExclude.concat(this.custom);
   },
   methods: {
     hideDebugPage() {
@@ -209,7 +223,7 @@ export default {
   text-shadow: 0 1px 3px #000;
 }
 .miniapp-option__timeline {
-  font-size: 14px;
+  font-size: 12px;
 }
 .miniapp-option__timeline-item {
   padding: 5px 3px;
@@ -222,7 +236,7 @@ export default {
   background: #efb7a7;
 }
 .miniapp-option__timeline-item--warn {
-  background: #fffae1;
+  background: #fffcec;
 }
 
 </style>

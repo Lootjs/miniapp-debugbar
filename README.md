@@ -51,14 +51,14 @@ amplitude.getInstance().logEvent(event, data, amplitudeListener(event, data));
 ### Скрытие дебагбаров
 Если вам не нужны некоторые дебагбары, то можно их убрать через props:
 ```vue
-<MiniappDebugger v-if="isDevelopment" exclude="['cookies', 'route']"/>
+<MiniappDebugger v-if="isDevelopment" :exclude="['cookies', 'route']"/>
 ```
 
 
 ### Добавление дебагбаров
 Если вам нужно добавить свои дебагбары, то можно их указать через props:
 ```vue
-<MiniappDebugger v-if="isDevelopment" custom-options="customOptions"/>
+<MiniappDebugger v-if="isDevelopment" custom="customOptions"/>
 ```
 
 ```javascript
