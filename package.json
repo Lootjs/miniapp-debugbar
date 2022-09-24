@@ -1,6 +1,6 @@
 {
   "name": "miniapp-debugbar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Debugbar for your awesome miniapps",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
