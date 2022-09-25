@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import hotkeys from 'hotkeys-js';
 import Route from './debugbars/router-debugbar-option';
 import Console from './debugbars/console-debugbar-option';
 import Analytics from './debugbars/analytics-debugbar-option';
@@ -90,6 +91,10 @@ export default {
     custom: {
       type: Array,
       default: () => [],
+    },
+    hotkeys: {
+      type: Array,
+      default: () => [],
     }
   },
   computed: {
@@ -106,9 +111,19 @@ export default {
       const medias = document.querySelectorAll('.miniapp-debugbar__body--highlight div');
       medias.forEach(mediaEl => {
         const size = getComputedStyle(mediaEl);
-        mediaEl.setAttribute('data-size', size.width+'/'+size.height)
+        mediaEl.setAttribute('data-size', size.width+' / '+size.height)
       });
     }
+  },
+  mounted() {
+    this.hotkeys.forEach(({hotkey, handler}) => hotkeys(hotkey, handler))
+  },
+  unmounted() {
+    hotkeys.unbind();
+  },
+  // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
+  destroyed() {
+    hotkeys.unbind();
   },
   methods: {
     hideDebugPage() {
